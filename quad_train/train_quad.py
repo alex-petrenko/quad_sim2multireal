@@ -85,7 +85,11 @@ def run_task(task_param):
     from quad_train.algos.ppo import PPO
     from quad_train.algos.trpo import TRPO
 
-    if task_param["env"] == "QuadrotorEnv":
+    if task_param["env"] == "_QuadrotorEnvNew":
+        from gym_art.quadrotor.quadrotor import QuadrotorEnv
+        env = TfEnv(QuadrotorEnv(**task_param["env_param"]))
+        del task_param["env_param"]
+    elif task_param["env"] == "QuadrotorEnv":
         from quad_sim.quadrotor import QuadrotorEnv
         env = TfEnv(QuadrotorEnv(**task_param["env_param"]))
         del task_param["env_param"]
